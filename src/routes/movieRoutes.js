@@ -1,4 +1,5 @@
 import express from "express";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 import { validateRequest } from "../middleware/validateRequest.js";
 import { createMovieSchema, updateMovieSchema } from "../validators/movieValidators.js";
 import {
@@ -10,6 +11,10 @@ import {
 } from "../controllers/movieController.js";
 
 const router = express.Router();
+
+// Protect all routes below this middleware
+// Check for the JWT token in the request header
+router.use(authMiddleware);
 
 router.get("/", getMovies);
 router.get("/:id", getMovieById);

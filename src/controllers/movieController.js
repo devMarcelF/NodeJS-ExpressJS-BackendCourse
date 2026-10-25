@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const getMovies = async (req, res) => {
+  console.log("Fetching movies");
   const movies = await prisma.movie.findMany();
   res.json({ status: "success", data: movies });
 };
